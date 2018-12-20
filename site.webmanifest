@@ -1,0 +1,26 @@
+{
+    "name": "Froglet Apps - Taskendar",
+    "short_name": "Taskendar",
+    "lang": "en-GB",
+    "start_url": "Taskendar.html",
+    "theme_color": "#224422",
+    "background_color": "#224422",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "https://frogletapps.github.io/Assets/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://frogletapps.github.io/Assets/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "https://frogletapps.github.io/Assets/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
