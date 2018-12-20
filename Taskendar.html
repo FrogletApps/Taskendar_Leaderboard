@@ -26,27 +26,65 @@
 
 	<body>
 		<div id="scoreboard">
-			<div class="stamp">
-				<img src="waxStamp.png">
-				<p id="score1" class="score">120</p>
+		<div class="group">
+				<div class="picture">
+					<img src="pictureFrame.png">
+					<p id="name0" class="name"></p>
+					<p id="position0" class="position"></p>
+				</div>
+				<div class="stamp">
+					<img src="waxStamp.png">
+					<p id="score0" class="score"></p>	
+				</div>
 			</div>
-			<div class="stamp">
-				<img src="waxStamp.png">	
-				<p id="score2" class="score">42</p>
+			<div class="group">
+				<div class="picture">
+					<img src="pictureFrame.png">
+					<p id="name1" class="name"></p>
+					<p id="position1" class="position"></p>
+				</div>
+				<div class="stamp">
+					<img src="waxStamp.png">
+					<p id="score1" class="score"></p>
+				</div>
 			</div>
-			<div class="stamp">
-				<img src="waxStamp.png">
-				<p id="score3" class="score">3</p>
+			<div class="group">
+				<div class="picture">
+					<img src="pictureFrame.png">
+					<p id="name2" class="name"></p>
+					<p id="position2" class="position"></p>
+				</div>
+				<div class="stamp">
+					<img src="waxStamp.png">	
+					<p id="score2" class="score"></p>
+				</div>
 			</div>
-			<div class="stamp">
-				<img src="waxStamp.png">
-				<p id="score4" class="score">5</p>	
+			<div class="group">
+				<div class="picture">
+					<img src="pictureFrame.png">
+					<p id="name3" class="name"></p>
+					<p id="position3" class="position"></p>
+				</div>
+				<div class="stamp">
+					<img src="waxStamp.png">
+					<p id="score3" class="score"></p>
+				</div>
 			</div>
-			<div class="stamp">
-				<img src="waxStamp.png">
-				<p id="score5" class="score">78</p>	
+			<div class="group">
+				<div class="picture">
+					<img src="pictureFrame.png">
+					<p id="name4" class="name"></p>
+					<p id="position4" class="position"></p>
+				</div>
+				<div class="stamp">
+					<img src="waxStamp.png">
+					<p id="score4" class="score"></p>	
+				</div>
 			</div>
 		</div>
+
+		<input type="button" value="Back" onclick="generateScores(false);">
+		<input type="button" value="Next" onclick="generateScores(true);">
 
 		<script src="upup.min.js"></script>
 		<script src="Taskendar.js"></script>
