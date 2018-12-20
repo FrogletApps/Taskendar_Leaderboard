@@ -3,11 +3,18 @@ var pages;
 var position = 0;
 var previousScore = null;
 var previousPosition = null;
+//Get the URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+//Get the position to open to a certain page
+const positionNumber = parseInt(urlParams.get('position'));
 
 loadJSON(function(response) {
     // Parse JSON string into object
     json = JSON.parse(response);
     length = json.length;
+    if (positionNumber != null && positionNumber >= 0 && positionNumber < json.length){
+        position = positionNumber;
+    }
     generateScores(null);
 });
 
@@ -16,8 +23,16 @@ function generateScores(next){
         position += 5;
     } else if (next == false && position -5 >= 0) {
         position -= 5;
+    } else if (next == false) {
+        //If a user adjust the position make sure they can still view everything
+        position = 0;
     }
     //var pageNo = start * 5;
+
+    if (history.pushState) {
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?position=' + position;
+        window.history.pushState({path:newurl},'',newurl);
+    }
 
     for (let i = 0; i < 5; i++){
         if (json[position + i] == null) {
