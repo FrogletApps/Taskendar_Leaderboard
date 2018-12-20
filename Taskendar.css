@@ -12,6 +12,7 @@ html, body {
 
 .group {
     display: inline-block;
+    margin-top: 2rem;
 }
 
 img{
@@ -24,6 +25,19 @@ p{
     font-family: 'Special Elite', courier, cursive;
     font-weight: bold;
 }
+
+input[type=button] {
+    background-color: #9d302b;
+    color: white;
+    font-family: 'Special Elite', courier, cursive;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+    border: 1px solid #701d1f;
+    border-radius: 10%;
+    padding: 0.5rem 1rem;
+}
+
 
 .name {
     font-size: 1.5rem;
