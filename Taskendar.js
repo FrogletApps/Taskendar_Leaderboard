@@ -1,12 +1,38 @@
 var json;
+var jsonFilePath;
 var pages;
 var position = 0;
 var previousScore = null;
 var previousPosition = null;
+
 //Get the URL parameters
 const urlParams = new URLSearchParams(window.location.search);
 //Get the position to open to a certain page
 const positionNumber = parseInt(urlParams.get('position'));
+var year = parseInt(urlParams.get('year'));
+
+//2019 isn't ready yet so assume 2018
+if (isNaN(year)){
+    year = 2018;
+}
+
+getYear()
+
+function getYear(){
+    switch(year){
+        case 2019:
+            console.log(2019);
+            jsonFilePath = "https://spreadsheets.google.com/feeds/cells/1qyh0AGHmAAUxoNEOTq7rLRq3JgM9pEawrMG4c845zT8/1/public/full?alt=json";
+        break;
+        case 2018:
+            console.log(2018);
+            jsonFilePath = "scores2018.json";
+            
+        break;
+        default:
+            
+    }
+}
 
 loadJSON(function(response) {
     // Parse JSON string into object
@@ -16,21 +42,57 @@ loadJSON(function(response) {
         position = positionNumber;
     }
     generateScores(null);
+    lastUpdated();
 });
 
+function lastUpdated(){
+    switch(year){
+        case 2019:
+        var fullDateUpdated = new Date(Date.parse(json.feed.updated.$t));
+            var monthUpdated = fullDateUpdated.getMonth() + 1
+            document.getElementById("lastUpdate").innerHTML = "Scores last updated " + fullDateUpdated.getDate() + "/" + monthUpdated + "/" + fullDateUpdated.getFullYear();
+        break;
+        case 2018:
+            document.getElementById("lastUpdate").innerHTML = "Scores last updated 25/12/2018";
+        break;            
+    }
+}
+
 function generateScores(next){
+    switch(year){
+        case 2019:
+            function namePosition(i){
+                j = i*2;
+                console.log(j)
+                return json.entry.j.content.$t;
+            }
+            function totalScorePosition(i){
+                j = (i*2)+1
+                console.log(j)
+                return json.entry.j.content.$t;
+            }
+        break;
+        case 2018:
+            function namePosition(i){
+                return json[position + i].Username;
+            }
+            function totalScorePosition(i){
+                return json[position + i].Total;
+            }
+        break;
+    }
+
     if (next == true && position + 5 < length){
         position += 5;
     } else if (next == false && position -5 >= 0) {
         position -= 5;
     } else if (next == false) {
-        //If a user adjust the position make sure they can still view everything
+        //If a user adjusts the position make sure they can still view everything
         position = 0;
     }
-    //var pageNo = start * 5;
 
     if (history.pushState) {
-        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?position=' + position;
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?position=' + position + '&year=' + year;
         window.history.pushState({path:newurl},'',newurl);
     }
 
@@ -40,15 +102,15 @@ function generateScores(next){
             document.getElementById("score" + i).innerHTML = "0";
             document.getElementById("position" + i).innerHTML = "-";
         } else if (previousScore == json[position + i].Total){
-            document.getElementById("name" + i).innerHTML = json[position + i].Username;
-            document.getElementById("score" + i).innerHTML = json[position + i].Total;
+            document.getElementById("name" + i).innerHTML = namePosition(i);
+            document.getElementById("score" + i).innerHTML = totalScorePosition(i);
             document.getElementById("position" + i).innerHTML = previousPosition;
         } else {
-            document.getElementById("name" + i).innerHTML = json[position + i].Username;
-            document.getElementById("score" + i).innerHTML = json[position + i].Total;
+            document.getElementById("name" + i).innerHTML = namePosition(i);
+            document.getElementById("score" + i).innerHTML = totalScorePosition(i);
             document.getElementById("position" + i).innerHTML = suffix(position + i + 1);
             previousPosition = suffix(position + i + 1);
-            previousScore = json[position + i].Total;
+            previousScore = totalScorePosition;
         }
     }
 }
@@ -70,12 +132,11 @@ function suffix(i) {
     return i + "th";
 }
 
-
 //Based on code from https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
 function loadJSON(callback) {   
     var xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'scores.json', true);
+    xobj.open('GET', jsonFilePath, true);
     xobj.onreadystatechange = function () {
           if (xobj.readyState == 4 && xobj.status == "200") {
             // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
