@@ -1,4 +1,4 @@
-<!--Created by James Pearson 20/12/2018, last updated 20/12/2018-->
+<!--Created by James Pearson 20/12/2018, last updated 01/12/2019-->
 
 <!DOCTYPE html>
 <html lang="en-gb">
@@ -6,7 +6,7 @@
 	<head>
 		<title>Taskendar Leaderboard</title>
 		<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="Description" content="FILL THIS IN">
+		<meta name="Description" content="Taskender Leaderboard">
 
 		<link rel="stylesheet" type="text/css" href="https://frogletapps.github.io/Assets/FrogletApps.css">
 		<link rel="stylesheet" type="text/css" href="Taskendar.css">
@@ -25,8 +25,15 @@
 	</head>
 
 	<body>
+		<!--<div id="center">
+			<select id="yearSelect" onchange="getYear();">
+				<option value="2019" selected="selected">2019</option>
+				<option value="2018">2018</option>
+			</select> 
+		</div>-->
+
 		<div id="scoreboard">
-		<div class="group">
+			<div class="group">
 				<div class="picture">
 					<img src="pictureFrame.png">
 					<p id="name0" class="name"></p>
@@ -90,7 +97,7 @@
 		</div>
 
 		<br><br>
-		<p>Scores last updated 25/12/2018</p>
+		<p id="lastUpdate"></p>
 
 		<script src="upup.min.js"></script>
 		<script src="Taskendar.js"></script>
