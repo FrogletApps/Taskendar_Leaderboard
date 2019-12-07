@@ -11,18 +11,18 @@ const urlParams = new URLSearchParams(window.location.search);
 const positionNumber = parseInt(urlParams.get('position'));
 var year = parseInt(urlParams.get('year'));
 
-//2019 isn't ready yet so assume 2018
+//If no date specified assume 2019
 if (isNaN(year)){
-    year = 2018;
+    year = 2019;
 }
 
-getYear()
+getData()
 
-function getYear(){
+function getData(){
     switch(year){
         case 2019:
             console.log(2019);
-            jsonFilePath = "https://spreadsheets.google.com/feeds/cells/1qyh0AGHmAAUxoNEOTq7rLRq3JgM9pEawrMG4c845zT8/1/public/full?alt=json";
+            jsonFilePath = "scores2019.json";
         break;
         case 2018:
             console.log(2018);
@@ -50,7 +50,7 @@ function lastUpdated(){
         case 2019:
         var fullDateUpdated = new Date(Date.parse(json.feed.updated.$t));
             var monthUpdated = fullDateUpdated.getMonth() + 1
-            document.getElementById("lastUpdate").innerHTML = "Scores last updated " + fullDateUpdated.getDate() + "/" + monthUpdated + "/" + fullDateUpdated.getFullYear();
+            document.getElementById("lastUpdate").innerHTML = "Scores last updated 07/12/2019";
         break;
         case 2018:
             document.getElementById("lastUpdate").innerHTML = "Scores last updated 25/12/2018";
@@ -59,27 +59,11 @@ function lastUpdated(){
 }
 
 function generateScores(next){
-    switch(year){
-        case 2019:
-            function namePosition(i){
-                j = i*2;
-                console.log(j)
-                return json.entry.j.content.$t;
-            }
-            function totalScorePosition(i){
-                j = (i*2)+1
-                console.log(j)
-                return json.entry.j.content.$t;
-            }
-        break;
-        case 2018:
-            function namePosition(i){
-                return json[position + i].Username;
-            }
-            function totalScorePosition(i){
-                return json[position + i].Total;
-            }
-        break;
+    function namePosition(i){
+        return json[position + i].Username;
+    }
+    function totalScorePosition(i){
+        return json[position + i].Total;
     }
 
     if (next == true && position + 5 < length){
