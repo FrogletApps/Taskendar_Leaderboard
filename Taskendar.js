@@ -1,14 +1,18 @@
 var json;
 var jsonFilePath;
 var pages;
-var position = 0;
+var pagePosition = 0;
+var prevPagePosition = null;
 var previousScore = null;
-var previousPosition = null;
+var previousPlace = null;
+
+//Set the colours for picture frame background
+var colours = ['#ffd700', '#701d1f', '#9d302b', '#000000', '#404040', '#ffffff'];
 
 //Get the URL parameters
 const urlParams = new URLSearchParams(window.location.search);
-//Get the position to open to a certain page
-const positionNumber = parseInt(urlParams.get('position'));
+//Get the pagePosition to open to a certain page
+const positionNumber = parseInt(urlParams.get('pagePosition'));
 var year = parseInt(urlParams.get('year'));
 
 //Get the JSON file for a certain year
@@ -32,12 +36,20 @@ function getData(){
     }
 }
 
+//Set random colours for picture frame background
+function randomColour(number){
+    //Pick a colour
+    var randomColour = colours[Math.floor(Math.random() * colours.length)];
+    //Set frame colours
+    document.getElementById('frame'+number).style.backgroundColor = randomColour;
+}
+
 loadJSON(function(response) {
     // Parse JSON string into object
     json = JSON.parse(response);
     length = json.length;
     if (positionNumber != null && positionNumber >= 0 && positionNumber < json.length){
-        position = positionNumber;
+        pagePosition = positionNumber;
     }
     generateScores(null);
     lastUpdated();
@@ -56,37 +68,48 @@ function lastUpdated(){
 }
 
 function generateScores(next){
-    if (next == true && position + 5 < length){
-        position += 5;
-    } else if (next == false && position -5 >= 0) {
-        position -= 5;
-    } else if (next == false) {
-        //If a user adjusts the position make sure they can still view everything
-        position = 0;
+    regenerateColours = true;
+    if (next === true && pagePosition + 5 < length){
+        pagePosition += 5;
+    } else if (next === false && pagePosition - 5 >= 0) {
+        pagePosition -= 5;
+    } else if (next === false) {
+        //If a user adjusts the pagePosition make sure they can still view everything
+        pagePosition = 0;
+    }
+
+    //Only regenerate colours if the position has moved
+    if (prevPagePosition == pagePosition){
+        regenerateColours = false;
+        
     }
 
     if (history.pushState) {
-        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?position=' + position + '&year=' + year;
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?position=' + pagePosition + '&year=' + year;
         window.history.pushState({path:newurl},'',newurl);
     }
 
     for (let i = 0; i < 5; i++){
-        if (json[position + i] == null) {
+        if (regenerateColours){
+            randomColour(i);  //Set picture frame background
+        }
+        if (json[pagePosition + i] == null) {
             document.getElementById("name" + i).innerHTML = "-";
             document.getElementById("score" + i).innerHTML = "0";
             document.getElementById("position" + i).innerHTML = "-";
-        } else if (previousScore == json[position + i].Total){
-            document.getElementById("name" + i).innerHTML = json[position + i].Username;
-            document.getElementById("score" + i).innerHTML = json[position + i].Total;
-            document.getElementById("position" + i).innerHTML = previousPosition;
+        } else if (previousScore == json[pagePosition + i].Total){
+            document.getElementById("name" + i).innerHTML = json[pagePosition + i].Username;
+            document.getElementById("score" + i).innerHTML = json[pagePosition + i].Total;
+            document.getElementById("position" + i).innerHTML = previousPlace;
         } else {
-            document.getElementById("name" + i).innerHTML = json[position + i].Username;
-            document.getElementById("score" + i).innerHTML = json[position + i].Total;
-            document.getElementById("position" + i).innerHTML = suffix(position + i + 1);
-            previousPosition = suffix(position + i + 1);
-            previousScore = json[position + i].Total;
+            document.getElementById("name" + i).innerHTML = json[pagePosition + i].Username;
+            document.getElementById("score" + i).innerHTML = json[pagePosition + i].Total;
+            document.getElementById("position" + i).innerHTML = suffix(pagePosition + i + 1);
+            previousPlace = suffix(pagePosition + i + 1);
+            previousScore = json[pagePosition + i].Total;
         }
     }
+    prevPagePosition = pagePosition;
 }
 
 //Generate a suffix for a number
