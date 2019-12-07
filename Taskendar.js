@@ -8,12 +8,13 @@ var previousPlace = null;
 
 //Set the colours for picture frame background and text colour
 var colours = [
-    ['#ffd700', '#000'], // Gold / Black
-    ['#701d1f', '#fff'], // DarkerRed / White
-    ['#9d302b', '#fff'], // LighterRed / White
-    ['#000000', '#fff'], // Black / White
-    ['#404040', '#fff'], // Grey / White
-    ['#ffffff', '#000']  // White / Black
+    ['#7f6b00', '#fff'], // DarkGold    / White
+    ['#ffd700', '#000'], // LightGold   / Black
+    ['#701d1f', '#fff'], // DarkRed     / White
+    ['#9d302b', '#fff'], // LightRed    / White
+    ['#000000', '#fff'], // Black       / White
+    ['#404040', '#fff'], // Grey        / White
+    ['#ffffff', '#000']  // White       / Black
 ];
 
 //Get the URL parameters
