@@ -48,8 +48,6 @@ loadJSON(function(response) {
 function lastUpdated(){
     switch(year){
         case 2019:
-        var fullDateUpdated = new Date(Date.parse(json.feed.updated.$t));
-            var monthUpdated = fullDateUpdated.getMonth() + 1
             document.getElementById("lastUpdate").innerHTML = "Scores last updated 07/12/2019";
         break;
         case 2018:
@@ -59,13 +57,6 @@ function lastUpdated(){
 }
 
 function generateScores(next){
-    function namePosition(i){
-        return json[position + i].Username;
-    }
-    function totalScorePosition(i){
-        return json[position + i].Total;
-    }
-
     if (next == true && position + 5 < length){
         position += 5;
     } else if (next == false && position -5 >= 0) {
@@ -86,15 +77,15 @@ function generateScores(next){
             document.getElementById("score" + i).innerHTML = "0";
             document.getElementById("position" + i).innerHTML = "-";
         } else if (previousScore == json[position + i].Total){
-            document.getElementById("name" + i).innerHTML = namePosition(i);
-            document.getElementById("score" + i).innerHTML = totalScorePosition(i);
+            document.getElementById("name" + i).innerHTML = json[position + i].Username;
+            document.getElementById("score" + i).innerHTML = json[position + i].Total;
             document.getElementById("position" + i).innerHTML = previousPosition;
         } else {
-            document.getElementById("name" + i).innerHTML = namePosition(i);
-            document.getElementById("score" + i).innerHTML = totalScorePosition(i);
+            document.getElementById("name" + i).innerHTML = json[position + i].Username;
+            document.getElementById("score" + i).innerHTML = json[position + i].Total;
             document.getElementById("position" + i).innerHTML = suffix(position + i + 1);
             previousPosition = suffix(position + i + 1);
-            previousScore = totalScorePosition;
+            previousScore = json[position + i].Total;
         }
     }
 }
