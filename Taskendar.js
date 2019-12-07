@@ -35,10 +35,12 @@ function getData(){
         case 2019:
             //console.log(2019);
             jsonFilePath = "scores2019.json";
+            document.getElementById('title').innerHTML = "#12tasks 2019";
         break;
         case 2018:
             //console.log(2018);
             jsonFilePath = "scores2018.json";
+            document.getElementById('title').innerHTML = "Taskendar 2018";
         break;
     }
 }
