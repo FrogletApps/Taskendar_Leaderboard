@@ -11,26 +11,24 @@ const urlParams = new URLSearchParams(window.location.search);
 const positionNumber = parseInt(urlParams.get('position'));
 var year = parseInt(urlParams.get('year'));
 
-//If no date specified assume 2019
-if (isNaN(year)){
-    year = 2019;
-}
-
+//Get the JSON file for a certain year
 getData()
 
 function getData(){
+    //If no date specified assume 2019
+    if (isNaN(year)){
+        year = 2019;
+    }
+
     switch(year){
         case 2019:
-            console.log(2019);
+            //console.log(2019);
             jsonFilePath = "scores2019.json";
         break;
         case 2018:
-            console.log(2018);
+            //console.log(2018);
             jsonFilePath = "scores2018.json";
-            
         break;
-        default:
-            
     }
 }
 
