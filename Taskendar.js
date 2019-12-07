@@ -46,12 +46,13 @@ loadJSON(function(response) {
 });
 
 function lastUpdated(){
+    string = "Scores last updated ";
     switch(year){
         case 2019:
-            document.getElementById("lastUpdate").innerHTML = "Scores last updated 07/12/2019";
+            document.getElementById("lastUpdate").innerHTML = string + "07/12/2019";
         break;
         case 2018:
-            document.getElementById("lastUpdate").innerHTML = "Scores last updated 25/12/2018";
+            document.getElementById("lastUpdate").innerHTML = string + "25/12/2018";
         break;            
     }
 }
