@@ -6,8 +6,15 @@ var prevPagePosition = null;
 var previousScore = null;
 var previousPlace = null;
 
-//Set the colours for picture frame background
-var colours = ['#ffd700', '#701d1f', '#9d302b', '#000000', '#404040', '#ffffff'];
+//Set the colours for picture frame background and text colour
+var colours = [
+    ['#ffd700', '#000'], // Gold / Black
+    ['#701d1f', '#fff'], // DarkerRed / White
+    ['#9d302b', '#fff'], // LighterRed / White
+    ['#000000', '#fff'], // Black / White
+    ['#404040', '#fff'], // Grey / White
+    ['#ffffff', '#000']  // White / Black
+];
 
 //Get the URL parameters
 const urlParams = new URLSearchParams(window.location.search);
@@ -36,12 +43,17 @@ function getData(){
     }
 }
 
-//Set random colours for picture frame background
-function randomColour(number){
+//Get random colours for picture frame background/overlay text
+function getRandomColour(){
     //Pick a colour
-    var randomColour = colours[Math.floor(Math.random() * colours.length)];
+    return colours[Math.floor(Math.random() * colours.length)];
+}
+
+//Set random colours for picture frame background/overlay text
+function setRandomColour(number, randomColour){
     //Set frame colours
-    document.getElementById('frame'+number).style.backgroundColor = randomColour;
+    document.getElementById('frame'+number).style.backgroundColor = randomColour[0];
+    document.getElementById('position'+number).style.color = randomColour[1];
 }
 
 loadJSON(function(response) {
@@ -81,7 +93,6 @@ function generateScores(next){
     //Only regenerate colours if the position has moved
     if (prevPagePosition == pagePosition){
         regenerateColours = false;
-        
     }
 
     if (history.pushState) {
@@ -91,7 +102,8 @@ function generateScores(next){
 
     for (let i = 0; i < 5; i++){
         if (regenerateColours){
-            randomColour(i);  //Set picture frame background
+            colour = getRandomColour();
+            setRandomColour(i, colour);
         }
         if (json[pagePosition + i] == null) {
             document.getElementById("name" + i).innerHTML = "-";
