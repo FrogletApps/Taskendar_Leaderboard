@@ -74,7 +74,7 @@ function lastUpdated(){
     string = "Scores last updated ";
     switch(year){
         case 2019:
-            document.getElementById("lastUpdate").innerHTML = string + "09/12/2019";
+            document.getElementById("lastUpdate").innerHTML = string + "19/12/2019";
         break;
         case 2018:
             document.getElementById("lastUpdate").innerHTML = string + "25/12/2018";
