@@ -39,6 +39,7 @@ function getData(){
             document.getElementById('title').innerHTML = "Taskendar 2018";
         break;
         default:
+            year = "2020a";  //This sets the value in the URL
             jsonFilePath = "scores2020a.json";
             document.getElementById('title').innerHTML = "#hometasking 2020";
     }
