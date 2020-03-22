@@ -75,6 +75,8 @@ function lastUpdated(){
     switch(year){
         case 2019:
             document.getElementById("lastUpdate").innerHTML = string + "19/12/2019";
+        case "2019":
+            document.getElementById("lastUpdate").innerHTML = string + "24/12/2019";
         break;
         case 2018:
             document.getElementById("lastUpdate").innerHTML = string + "25/12/2018";
