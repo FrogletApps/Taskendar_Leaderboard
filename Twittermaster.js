@@ -157,3 +157,13 @@ function loadJSON(callback) {
     };
     xobj.send(null);  
  }
+
+ //Ensures that the page can work offline
+UpUp.start({
+    "content-url": "Twittermaster.html",
+    "assets":[
+        "Twittermaster.css",
+        "Twittermaster.js",
+        "scores2019.json"
+    ]
+});

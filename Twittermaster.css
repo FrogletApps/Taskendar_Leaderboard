@@ -1,12 +1,11 @@
 html, body {
-    background-color: gray;
+    background-color: #808080;
 }
 
 h1 {
-    color: white;
+    color: #fff;
     font-family: 'Special Elite', courier, cursive;
     font-size: 3rem;
-    font-weight: bold;
 }
 
 .picture {
@@ -36,14 +35,14 @@ img{
 }
 
 p{
-    color: white;
+    color: #fff;
     font-family: 'Special Elite', courier, cursive;
     font-weight: bold;
 }
 
 input[type=button] {
     background-color: #9d302b;
-    color: white;
+    color: #fff;
     font-family: 'Special Elite', courier, cursive;
     font-weight: bold;
     font-size: 1.5rem;

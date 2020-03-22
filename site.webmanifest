@@ -1,10 +1,10 @@
 {
-    "name": "Froglet Apps - Taskendar",
-    "short_name": "Taskendar",
+    "name": "Twittermaster Leaderboard",
+    "short_name": "Twittermaster",
     "lang": "en-GB",
-    "start_url": "Taskendar.html",
     "theme_color": "#224422",
     "background_color": "#224422",
+    "start_url": "Twittermaster.html",
     "display": "standalone",
     "icons": [
         {

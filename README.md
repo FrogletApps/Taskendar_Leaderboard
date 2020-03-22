@@ -1,2 +1,2 @@
-# Taskendar Leaderboard
-A leaderboard for displaying the scores of Taskendar
+# Twittermaster Leaderboard
+A leaderboard for displaying the scores of Twittermaster competitions
