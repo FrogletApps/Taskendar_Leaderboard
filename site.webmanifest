@@ -2,9 +2,9 @@
     "name": "Twittermaster Leaderboard",
     "short_name": "Twittermaster",
     "lang": "en-GB",
-    "theme_color": "#224422",
-    "background_color": "#224422",
     "start_url": "Twittermaster.html",
+    "theme_color": "#808080",
+    "background_color": "#808080",
     "display": "standalone",
     "icons": [
         {
