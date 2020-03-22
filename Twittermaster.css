@@ -8,6 +8,11 @@ h1 {
     font-size: 3rem;
 }
 
+p{
+    color: #fff;
+    font-family: 'Special Elite', courier, cursive;
+}
+
 .picture {
     width: 8rem;
     height: 8rem;
@@ -32,12 +37,6 @@ img{
 .group {
     display: inline-block;
     margin-top: 2rem;
-}
-
-p{
-    color: #fff;
-    font-family: 'Special Elite', courier, cursive;
-    font-weight: bold;
 }
 
 input[type=button] {
