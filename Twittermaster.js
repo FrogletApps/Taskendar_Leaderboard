@@ -165,6 +165,6 @@ UpUp.start({
     "assets":[
         "Twittermaster.css",
         "Twittermaster.js",
-        "scores2019.json"
+        "scores2020a.json"
     ]
 });
