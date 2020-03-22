@@ -21,28 +21,26 @@ var colours = [
 const urlParams = new URLSearchParams(window.location.search);
 //Get the pagePosition to open to a certain page
 const positionNumber = parseInt(urlParams.get('pagePosition'));
-var year = parseInt(urlParams.get('year'));
+var year = urlParams.get('year');
 
 //Get the JSON file for a certain year
 getData()
 
 function getData(){
-    //If no date specified assume 2019
-    if (isNaN(year)){
-        year = 2019;
-    }
-
     switch(year){
-        case 2019:
-            //console.log(2019);
+        //case "2020a":
+        //break;
+        case "2019":
             jsonFilePath = "scores2019.json";
             document.getElementById('title').innerHTML = "#12tasks 2019";
         break;
-        case 2018:
-            //console.log(2018);
+        case "2018":
             jsonFilePath = "scores2018.json";
             document.getElementById('title').innerHTML = "Taskendar 2018";
         break;
+        default:
+            jsonFilePath = "scores2020a.json";
+            document.getElementById('title').innerHTML = "#hometasking 2020";
     }
 }
 
@@ -73,12 +71,13 @@ loadJSON(function(response) {
 function lastUpdated(){
     string = "Scores last updated ";
     switch(year){
-        case 2019:
-            document.getElementById("lastUpdate").innerHTML = string + "19/12/2019";
+        case "2020a":
+            document.getElementById("lastUpdate").innerHTML = string + "22/03/2020";
+        break;
         case "2019":
             document.getElementById("lastUpdate").innerHTML = string + "24/12/2019";
         break;
-        case 2018:
+        case "2018":
             document.getElementById("lastUpdate").innerHTML = string + "25/12/2018";
         break;            
     }
